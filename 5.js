@@ -29,38 +29,47 @@ function previsao(lat, lon) {
   });
 }
 
-const menu1 = (lat, lon) => {
+/* const menu1 = (lat, lon) => {
   previsao(lat, lon)
     .then((resultado) => {
       console.log(
-        "Aqui a sua temperatura em celcius: " + resultado.data.main.temp
+        "Aqui está a temperatura em celcius: " + resultado.data.main.temp
       );
       return resultado.data.main.temp;
     })
     .catch((erro) => console.log(erro));
-};
-
+} */ 
 const menu2 = () => {
   let opcao = 0;
-  do {
-    opcao = prompt("Digite 1 para ver a temperatura, e 2 sair ");
-    Number(opcao);
-    switch (opcao) {
-      case "1":
-        lat = prompt("digite uma latitude: ");
-        Number(lat);
-        lon = prompt("digite uma longitude: ");
-        Number(lon);
-        menu1(lat,lon)
-        console.log("Para ver sua temperatura saia do menu, para adicionar mais, digite 1")
-        break;
-      case "2":
-        console.log("Saindo para ver as temperaturas...");
-        break;
-      default:
-        console.log("Você inseriu uma opção errada, tente novamente ");
-    }
-  } while (opcao != 2);
+  //do {
+  opcao = prompt("Digite 1 para ver a temperatura, e 2 sair ");
+  Number(opcao);
+  if (opcao == "2") {
+    return 0;
+  }
+   else if(opcao == "1"){  
+    lat = prompt("digite uma latitude: ");
+    Number(lat);
+    lon = prompt("digite uma longitude: ");
+    Number(lon);
+    //console.log(menu1(lat,lon))
+    previsao(lat, lon)
+      .then((resultado) => {
+        console.log(
+          "Aqui está a temperatura em celcius: " + resultado.data.main.temp
+        );
+        return resultado.data.main.temp;
+      })
+      .catch((erro) => console.log(erro));
+    console.log(
+      "Para ver sua temperatura saia do menu, para adicionar mais, digite 1"
+    );
+  }
+  else {
+    console.log("Opção incorreta, tente novamente...")
+  }
+  menu2();
+  //} while (opcao != 2);
 };
 
 menu2();
